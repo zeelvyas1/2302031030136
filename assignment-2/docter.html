@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF Pro Text:wght@500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Advent Pro:wght@400&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        html,
+body {
+  min-height: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(202deg, #61bfd9 16%, #0551b4 67%);
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+  .menu {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    top: 15%;
+    left: 0vw;
+    /* display: flex; */
+    z-index: 99;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transform: scale(0.6) translateY(30px);
+    color: #fff;
+    opacity: 0;
+    background: rgba(9, 9, 9, 0.9);
+    transition: 0.3s;
+    z-index: 999;
+  }
+  .page-content-wrapper {
+    position: fixed;
+    z-index: 2;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+    height: 100%;
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      position: fixed;
+      top: -10vh;
+      height: 120vh;
+      width: 60vw;
+      background: white;
+      z-index: 0;
+      transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+      box-shadow: 0 0 0 black;
+    }
+    &:before {
+      left: -10vw;
+    }
+    &:after {
+      right: -10vw;
+    }
+    .page-content {
+      position: relative;
+      z-index: 1;
+      transition: opacity 0.25s ease-in-out;
+      padding: 20px 40px 80px 40px;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      img {
+        width: 30vw;
+        height: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        box-shadow: 0 10px 10px rgba(black, 0.25);
+        &:nth-of-type(odd) {
+          float: left;
+          margin-right: 20px;
+        }
+        &:nth-of-type(even) {
+          float: right;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+  #menu-toggle,
+  #menu-toggle + label {
+    position: fixed;
+    top: 6%;
+    left: 0;
+    z-index: 3;
+    display: block;
+    height: 40px;
+    width: 40px;
+  }
+  #menu-toggle {
+    opacity: 0;
+  }
+  #menu-toggle + label {
+    transition: transform 0.5s ease-in-out;
+  }
+  #menu-toggle + label .fas {
+    font-weight: 400;
+    font-size: 35px;
+    position: absolute;
+    display: flex;
+    height: 40px;
+    width: 40px;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s ease-in-out;
+
+    &.fa-times {
+      opacity: 0;
+    }
+  }
+  .jefflink {
+    position: fixed;
+    z-index: 5;
+    bottom: 10px;
+    left: 50%;
+    padding: 20px;
+    background-image: linear-gradient(202deg, #61bfd9 16%, #0551b4 67%);
+    border-radius: 10px;
+    width: 220px;
+    text-align: center;
+    margin-left: -110px;
+    text-decoration: none;
+    color: white;
+    text-shadow: 0 2px 2px #0551b4;
+    transition: transform 0.5s ease-in-out;
+    &:hover {
+      background-image: linear-gradient(
+        202deg,
+        darken(#61bfd9, 10) 16%,
+        darken(#0551b4, 10) 67%
+      );
+      text-shadow: 0 2px 2px darken(#0551b4, 10);
+    }
+  }
+  #menu-toggle:checked {
+    + label {
+      transform: rotate(180deg);
+      .fas {
+        &.fa-times {
+          opacity: 1;
+        }
+        &.fa-bars {
+          opacity: 0;
+        }
+      }
+    }
+    ~ .page-content-wrapper {
+      pointer-events: none;
+      transform: scale(1.5);
+      &:before,
+      &:after {
+        box-shadow: 0 0 10px black;
+      }
+      &:before {
+        transform: translateX(-15vw);
+      }
+      &:after {
+        transform: translateX(15vw);
+      }
+      .page-content {
+        opacity: 0;
+      }
+    }
+    ~ .menu {
+      transform: scale(1) translateY(0px);
+      opacity: 1;
+    }
+    ~ .jefflink {
+      transform: translateY(200px);
+    }
+  }
+}
+    </style>
+</head>
+
+<body>
+    <div class="home">
+        <div class="frame-parent">
+            <div class="menu-icon" loading="lazy">
+                <!-- <i class="fa fa-bars" aria-hidden="true"></i> -->
+                <input type="checkbox" id="menu-toggle" />
+                <label for="menu-toggle"><i class="fas fa-times"></i>
+                    <i class="fas fa-bars"></i>
+                </label>
+                <div class="menu">
+                    <h4>Home</h4><br>
+                    <h4>Doctor</h4><br>
+                    <h4>search</h4><br>
+                    <h4>Settings</h4><br>
+                </div>
+            </div>
+            <b class="home1"> <span class="hom">Doctor</span></b>
+            <div class="map-icon" loading="lazy">
+                <i class="fa fa-map-o" aria-hidden="true"></i>
+            </div>
+        </div>
+        <main class="base-parent">
+            <div class="base"></div>
+            <section class="new-articles-text">
+                <div class="new-articles">
+                    <div class="new-articles1">Choose A Category</div>
+                    <div class="dr-category">
+                        <h6 class="cgry-dr">Cardiologist</h6>
+                        <h6 class="cgry-dr">Nephrologist</h6>
+                        <h6 class="cgry-dr">Gynecology</h6>
+                        <h6 class="cgry-dr">Orthopedics</h6>
+                    </div>
+                    <div class="image-frame">
+                        <div class="navigation-frame">
+                            <img class="image-iconbig" alt="" src="assets/img/slider-doctor-fullscreen-02.jpg" />
+
+                            <!-- <img class="navigation-icon" loading="lazy" alt="" src="./public/navigation.svg" /> -->
+                        </div>
+                        <!-- <img class="images-2-icon" alt="" src="./public/images-2@2x.png" /> -->
+                    </div>
+                </div>
+                <div class="img-detail">
+                    <div class="search-img">
+                        <h5 class="grycol">Brandon Guidelines</h5>
+                        <h5 class="blucol">
+                            <div class="call-dr">
+                                <h5 style="margin: 0;">Cardiology</h5>
+                                <i class="fa fa-phone in" aria-hidden="true"></i>
+                            </div>
+                        </h5>
+                        <h5 class="lhtgrycol">
+                            <div class="location-in">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                <h5 style="margin: 0;">Eastlake, Ohio, 4409</h5>
+                            </div>
+                        </h5>
+                        <!-- <div class="base10"></div>
+                        <div class="icon" alt="">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+
+                        <input class="search1" placeholder="Search" type="text" /> -->
+                    </div>
+                    <!-- <div class="fafa-call">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                    </div> -->
+                </div>
+            </section>
+            <div class="doctors-near">
+                <div class="hospitals">Nearby You</div>
+            </div>
+            <section class="menu-icon-map-wrapper">
+                <div class="menu-icon-map">
+                    <img class="image-icon1" loading="lazy" alt=""
+                        src="assets/img/hos.images.jpg" />
+
+                    <div class="reviews-frame">
+                        <div class="brandon-guidelines">
+                            <span class="brandon-guideline">Niles Peppertrout</span>
+                        </div>
+                        <div class="gynecologist-obstet">Gynecologist</div>
+                        <div class="new-articles-parent">
+                            <i class="fa fa-phone in" aria-hidden="true"></i>
+
+                            <div class="reviews">
+                                <span class="reviews1">+12 345 678 901</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="line-small-wrapper">
+                <div class="line-small">
+                    <div class="line1"></div>
+                </div>
+            </div>
+            <section class="frame-wrapper">
+                <div class="image-parent">
+                    <img class="image-icon2" loading="lazy" alt=""
+                        src="assets/img/gettyimages-1312706504-612x612.jpg" />
+
+                    <div class="gustav-purpleson-parent">
+                        <div class="gustav-purpleson">Parsley Montana</div>
+                        <div class="othopedist-traumato">Dentist</div>
+                        <div class="star-icons-parent">
+                            <i class="fa fa-phone in" aria-hidden="true"></i>
+
+                            <div class="reviews">
+                                <span class="reviews1">+23 456 789 012</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="line-small1">
+                <div class="line2"></div>
+            </div>
+            <footer class="tab-menu-home">
+                <div class="tab-menu-home1">
+                    <div class="base9"></div>
+                    <div class="icons-all">
+                        <div class="home-icon" loading="lazy">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </div>
+                        <div class="icon1" loading="lazy">
+                            <i class="fa fa-stethoscope active" aria-hidden="true"></i>
+                        </div>
+                        <div class="icon2" loading="lazy">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="icon3" loading="lazy">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </div>
+                        <!-- <div class="home-icon" loading="lazy">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </div> -->
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script src="https://kit.fontawesome.com/0786c5feec.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
